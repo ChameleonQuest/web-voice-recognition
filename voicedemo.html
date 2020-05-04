@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="voicedemo.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script>
+      var currentMenu = "";
+
+      function openMenu(menuId) {
+        console.log(menuId);
+        closeCurrentMenu()
+        currentMenu = menuId;
+        document.getElementById(menuId).style.width = "200px";
+      }
+      
+      function closeMenu(menuId) {
+        if (document.getElementById(menuId))
+          document.getElementById(menuId).style.width = "0";
+      }
+
+      function showSummary() {
+        // Don't show the "Key Takeaways" until after they experienced the menu atleast once.
+        document.getElementById("key-takeaways").style.display = "block";
+      }
+
+      function openParentMenu() {
+        openMenu("voice-menu");
+      }
+
+      function closeCurrentMenu() {
+        closeMenu(currentMenu);
+      }
+
+      function performAction(action, item) {
+        console.log(action, " ", item);
+
+        if (action=="poster") {
+          // Remove all previous posters before displaying selected one.
+          for (p of document.getElementsByClassName("poster"))
+            p.style.display = "none";
+        }
+
+        document.getElementById(item).style.display = "block";
+      }
+    </script>
+    <script>
+      // Using AnnYang voice recognition library.
+      if (annyang) {
+        // Let's define our first command. First the text we expect, and then the function it should call
+        var commands = {
+          "voice menu": () => { openMenu("voice-menu") },
+          "poster": () => { openMenu("poster-menu") },
+          "food": () => { openMenu("food-menu") },
+          "toy": () => { openMenu("toy-menu") },
+
+          "back to the future": () => { performAction("poster","back-to-the-future") },
+          "lego movie": () => { performAction("poster","lego-movie") },
+          "matrix": () => { performAction("poster","matrix") },
+
+          "pizza": () => { performAction("food","pizza") },
+          "wings": () => { performAction("food","wings") },
+          "ice cream": () => { performAction("food","ice-cream") },
+
+          "teddy bear": () => { performAction("toy","teddy-bear") },
+          "train": () => { performAction("toy","train") },
+          "frog": () => { performAction("toy","frog") },
+
+          "back": () => { openParentMenu() },
+          "exit menu": () => { closeCurrentMenu(); showSummary(); },
+        };
+    
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+    
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+      }
+    </script>      
+  </head>
+  <body>
+    <div id="app-container">
+      <div>
+        <div onclick="openMenu('voice-menu')">* Say "Voice Menu"</div>
+        <div id="key-takeaways">
+          Key takeaways
+          <ol>
+            <li> Engagement with voice commands would increase if the command options were clearly laid out.</li>
+            <li> Limiting the vocabulary of a speech recognition tool greatly increases the accuracy of command identification.</li>
+          </ol>
+        </div>
+      </div>
+      <div>
+        <div id="app">
+          <div id="voice-menu" class="sidenav">
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Poster</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Food</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Toy</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Exit Menu</div>
+          </div>
+          <div id="poster-menu" class="sidenav">
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Back</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Back to the Future</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Lego Movie</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Matrix</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Exit Menu</div>
+          </div>
+          <div id="food-menu" class="sidenav">
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Back</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Pizza</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Wings</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Ice Cream</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Exit Menu</div>
+          </div>
+          <div id="toy-menu" class="sidenav">
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Back</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Teddy Bear</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Train</div>
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Frog</div>
+            <hr class="navline" />
+            <div class="menu-item"><img src="images/talking_black.png" class="talking-head">Exit Menu</div>
+          </div>
+          <img id="back-to-the-future" src="images/BTTF.jpg" class="poster">
+          <img id="lego-movie" src="images/Lego.jpg" class="poster">
+          <img id="matrix" src="images/Matrix.jpg" class="poster">
+          <img id="pizza" src="images/pizza.png" class="food">
+          <img id="wings" src="images/wings.png" class="food">
+          <img id="ice-cream" src="images/shake.png" class="food">
+          <img id="teddy-bear" src="images/teddy.png" class="toy">
+          <img id="train" src="images/train.png" class="toy">
+          <img id="frog" src="images/froggy.png" class="toy">
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html>

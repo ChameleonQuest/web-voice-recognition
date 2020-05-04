@@ -1,0 +1,117 @@
+
+body {
+  background-color: #999;
+  font-family: Lomino, LominoSubset, open-sans, sans-serif;
+}
+
+li {
+  font-size:12px;
+  margin-bottom: 20px;
+}
+
+#app {
+  position:relative;
+  background-image:url('images/livingroom.jpeg');
+  background-repeat:no-repeat;
+  height: 600px;
+  width:900px;
+  margin: 0 auto;
+  background-size: cover;
+  }
+#app-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 200px auto;
+}
+
+#key-takeaways {
+  margin-top:50px;
+  display: none;
+  transition: .5s;
+}
+
+.sidenav {
+  /* height: 100%; */
+  width: 0;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(250, 93, 198, .1);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.navline {
+  border-color: rgba(143, 53, 113, 0.2);
+}
+
+.talking-head {
+  height:30px;
+}
+
+.menu-item {
+  line-height: 33px;
+}
+
+.menu-item img {
+  vertical-align: middle;
+}
+
+.poster {
+  display: none;
+  position: absolute;
+  right: 265px;
+  top: 200px;
+  height: 120px;
+}
+
+.food {
+  display: none;
+  position: absolute;
+}
+
+#pizza {
+  top: 400px;
+  left: 370px;
+  height: 40px;
+}
+
+#wings {
+  top: 413px;
+  left: 430px;
+  height: 20px;
+}
+
+#ice-cream {
+  top: 372px;
+  left: 450px;
+  height: 40px;
+}
+
+.toy {
+  display: none;
+  position: absolute;
+}
+
+#teddy-bear {
+  height: 230px;
+  bottom: 80px;
+  right: 100px;
+  z-index: 4;
+}
+
+#train {
+  height:57px;
+  left: 173px;
+  top: 393px;
+}
+
+#frog {
+  height: 100px;
+  right: 200px;
+  top: 330px;
+}
+
